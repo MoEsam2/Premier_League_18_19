@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.example.premier_league_18_19.R
+
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     abstract val bindingInflater: (LayoutInflater) -> VB
-    private var _binding: ViewBinding? = null
+    private lateinit var _binding : ViewBinding
 
     protected val binding
         get() =_binding as VB
@@ -17,7 +17,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         _binding = bindingInflater(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(requireNotNull(_binding).root)
+        setContentView(_binding.root)
         setUp()
         addCallBack()
 
